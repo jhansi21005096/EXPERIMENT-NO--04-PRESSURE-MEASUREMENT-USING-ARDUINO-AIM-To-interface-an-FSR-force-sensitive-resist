@@ -1,10 +1,10 @@
 # EXPERIMENT-NO--04-PRESSURE-MEASUREMENT-USING-ARDUINO-AIM-To-interface-an-FSR-force-sensitive-resistor
 
 
-## AIM: 
-To interface an FSR(force sensitive resistor) and scale the output voltage obtained to pressure applied 
+## AIM
+To interface an FSR(force sensitive resistor) and measure the force applied using LEDs.
  
-### COMPONENTS REQUIRED:
+### COMPONENTS REQUIRED
 1.	FSR  (force sensitive resistor)
 2.	1 KΩ resistor 
 3.	Arduino Uno 
@@ -12,7 +12,7 @@ To interface an FSR(force sensitive resistor) and scale the output voltage obtai
 5.	Connecting wires 
 
 
-### THEORY: 
+### THEORY
 FSRs are basically a resistor that changes its resistive value (in ohms Ω) depending on how much it is pressed. These sensors are fairly low cost, and easy to use. They also vary some from sensor to sensor perhaps 10%. FSR's resistance changes as more pressure is applied. When there is no pressure, the sensor looks like an infinite resistor (open circuit), as the pressure increases, the resistance goes down. This graph indicates approximately the resistance of the sensor at different force measurements.
  
 
@@ -62,7 +62,7 @@ The easiest way to measure a resistive sensor is to connect one end to power and
 
 
 
-### PROCEDURE:
+### PROCEDURE
 1.	Connect the circuit as per the circuit diagram 
 2.	Connect the board to your computer via the USB cable.
 3.	If needed, install the drivers.
@@ -76,43 +76,60 @@ The easiest way to measure a resistive sensor is to connect one end to power and
 
 
 ### PROGRAM 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+ ~~~
+ #define fsrpin A0
+#define led1 2
+#define led2 3
+#define led3 4
+#define led4 5
+#define led5 6
+#define led6 7
 
-![image](https://user-images.githubusercontent.com/36288975/163533136-5f8d00f2-8456-4d46-b243-d94d45f83eee.png)
+int fsrreading;
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
+  pinMode(led4, OUTPUT);
+  pinMode(led5, OUTPUT);
+  pinMode(led6, OUTPUT);
+}
+void loop(){
+  fsrreading = analogRead(fsrpin);
+  Serial.println(fsrreading);
+  if(fsrreading>150) {
+    digitalWrite(led1,HIGH);
+  }
+  else digitalWrite(led1,LOW);
+  if(fsrreading>300){
+    digitalWrite(led2,HIGH);
+  }
+  else digitalWrite(led2,LOW);
+  if(fsrreading>450){
+    digitalWrite(led3,HIGH);
+  }
+  else digitalWrite(led3,LOW);
+  if(fsrreading>600){
+    digitalWrite(led4,HIGH);
+  }
+  else digitalWrite(led4,LOW);
+  if(fsrreading>750){
+    digitalWrite(led5,HIGH);
+  }
+  else digitalWrite(led5,LOW);
+  if(fsrreading>900){
+    digitalWrite(led6,HIGH);
+  }
+  else digitalWrite(led6,LOW);
+}
+  ~~~
 
-### TABLE -02 OUTPUT VOLTAGES AND CHANGE IN RESISTANCES
+### OUTPUT
+![output](output.png)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-### RESULTS : Arduino uno is interfaced with FSR and output values are indicated on a graph.
+### RESULTS 
+Arduino uno is interfaced with FSR and output values are indicated on a graph.
